@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "https://github.com/ponyo877/grpc_tutorial/tutorialpb";
+
+package grpc_tutorial;
+
+service Printer {
+  rpc PrintStr (PrintStrRequest) returns (PrintStrResponce) {}
+}
+
+message PrintStrRequest {
+  string message = 1;
+}
+
+message PrintStrResponce {
+  string message = 1;
+}
+
+// commnand to generate pb
+// protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative tutorialpb/tutorial.proto
