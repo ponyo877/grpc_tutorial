@@ -4,8 +4,12 @@ option go_package = "https://github.com/ponyo877/grpc_tutorial/tutorialpb";
 
 package grpc_tutorial;
 
-service Printer {
-  rpc PrintStr (PrintStrRequest) returns (PrintStrResponce) {}
+service TurtorialService {
+  rpc PrintStr(PrintStrRequest) returns (PrintStrResponce) {}
+  rpc SaveImage(stream SaveImageRequest) returns (SaveImageResponce) {}
+  rpc GetImageUrl(GetImageUrlRequest) returns (GetImageUrlResponce) {}
+  rpc SaveColorCode(SaveColorCodeRequest) returns (SaveColorCodeResponce) {}
+  rpc GetColorCode(GetColorCodeRequest) returns (GetColorCodeResponce) {}
 }
 
 message PrintStrRequest {
@@ -16,5 +20,49 @@ message PrintStrResponce {
   string message = 1;
 }
 
+message SaveImageRequest {
+  oneof data {
+    ImageInfo info         = 1;
+    bytes     image_binary = 2;
+  };
+}
+
+message ImageInfo {
+  string place_id = 1;
+  string user_id  = 2;
+}
+
+message SaveImageResponce {}
+
+message GetImageUrlRequest {
+  string place_id = 1;
+}
+
+message GetImageUrlResponce {
+  string image_url = 1;
+}
+
+message SaveColorCodeRequest {
+  string place_id   = 1;
+  string user_id    = 2;
+  string color_code = 3;
+}
+
+message SaveColorCodeResponce {}
+
+message GetColorCodeRequest {
+  string place_id = 1;
+}
+
+message GetColorCodeResponce {
+  string color_code = 1;
+}
+
 // commnand to generate pb
-// protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative tutorialpb/tutorial.proto
+// protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=.
+// --go-grpc_opt=paths=source_relative tutorialpb/tutorial.proto
+
+// command to build docker for mysql
+// docker-compose up -d
+// docker-compose exec db /bin/bash
+// mysql -u root -D app_db

@@ -114,6 +114,468 @@ func (x *PrintStrResponce) GetMessage() string {
 	return ""
 }
 
+type SaveImageRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to Data:
+	//	*SaveImageRequest_Info
+	//	*SaveImageRequest_ImageBinary
+	Data isSaveImageRequest_Data `protobuf_oneof:"data"`
+}
+
+func (x *SaveImageRequest) Reset() {
+	*x = SaveImageRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_tutorialpb_tutorial_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SaveImageRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SaveImageRequest) ProtoMessage() {}
+
+func (x *SaveImageRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tutorialpb_tutorial_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SaveImageRequest.ProtoReflect.Descriptor instead.
+func (*SaveImageRequest) Descriptor() ([]byte, []int) {
+	return file_tutorialpb_tutorial_proto_rawDescGZIP(), []int{2}
+}
+
+func (m *SaveImageRequest) GetData() isSaveImageRequest_Data {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+func (x *SaveImageRequest) GetInfo() *ImageInfo {
+	if x, ok := x.GetData().(*SaveImageRequest_Info); ok {
+		return x.Info
+	}
+	return nil
+}
+
+func (x *SaveImageRequest) GetImageBinary() []byte {
+	if x, ok := x.GetData().(*SaveImageRequest_ImageBinary); ok {
+		return x.ImageBinary
+	}
+	return nil
+}
+
+type isSaveImageRequest_Data interface {
+	isSaveImageRequest_Data()
+}
+
+type SaveImageRequest_Info struct {
+	Info *ImageInfo `protobuf:"bytes,1,opt,name=info,proto3,oneof"`
+}
+
+type SaveImageRequest_ImageBinary struct {
+	ImageBinary []byte `protobuf:"bytes,2,opt,name=image_binary,json=imageBinary,proto3,oneof"`
+}
+
+func (*SaveImageRequest_Info) isSaveImageRequest_Data() {}
+
+func (*SaveImageRequest_ImageBinary) isSaveImageRequest_Data() {}
+
+type ImageInfo struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	PlaceId string `protobuf:"bytes,1,opt,name=place_id,json=placeId,proto3" json:"place_id,omitempty"`
+	UserId  string `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+}
+
+func (x *ImageInfo) Reset() {
+	*x = ImageInfo{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_tutorialpb_tutorial_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ImageInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ImageInfo) ProtoMessage() {}
+
+func (x *ImageInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_tutorialpb_tutorial_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ImageInfo.ProtoReflect.Descriptor instead.
+func (*ImageInfo) Descriptor() ([]byte, []int) {
+	return file_tutorialpb_tutorial_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ImageInfo) GetPlaceId() string {
+	if x != nil {
+		return x.PlaceId
+	}
+	return ""
+}
+
+func (x *ImageInfo) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type SaveImageResponce struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SaveImageResponce) Reset() {
+	*x = SaveImageResponce{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_tutorialpb_tutorial_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SaveImageResponce) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SaveImageResponce) ProtoMessage() {}
+
+func (x *SaveImageResponce) ProtoReflect() protoreflect.Message {
+	mi := &file_tutorialpb_tutorial_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SaveImageResponce.ProtoReflect.Descriptor instead.
+func (*SaveImageResponce) Descriptor() ([]byte, []int) {
+	return file_tutorialpb_tutorial_proto_rawDescGZIP(), []int{4}
+}
+
+type GetImageUrlRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	PlaceId string `protobuf:"bytes,1,opt,name=place_id,json=placeId,proto3" json:"place_id,omitempty"`
+}
+
+func (x *GetImageUrlRequest) Reset() {
+	*x = GetImageUrlRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_tutorialpb_tutorial_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetImageUrlRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetImageUrlRequest) ProtoMessage() {}
+
+func (x *GetImageUrlRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tutorialpb_tutorial_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetImageUrlRequest.ProtoReflect.Descriptor instead.
+func (*GetImageUrlRequest) Descriptor() ([]byte, []int) {
+	return file_tutorialpb_tutorial_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetImageUrlRequest) GetPlaceId() string {
+	if x != nil {
+		return x.PlaceId
+	}
+	return ""
+}
+
+type GetImageUrlResponce struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ImageUrl string `protobuf:"bytes,1,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+}
+
+func (x *GetImageUrlResponce) Reset() {
+	*x = GetImageUrlResponce{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_tutorialpb_tutorial_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetImageUrlResponce) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetImageUrlResponce) ProtoMessage() {}
+
+func (x *GetImageUrlResponce) ProtoReflect() protoreflect.Message {
+	mi := &file_tutorialpb_tutorial_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetImageUrlResponce.ProtoReflect.Descriptor instead.
+func (*GetImageUrlResponce) Descriptor() ([]byte, []int) {
+	return file_tutorialpb_tutorial_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetImageUrlResponce) GetImageUrl() string {
+	if x != nil {
+		return x.ImageUrl
+	}
+	return ""
+}
+
+type SaveColorCodeRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	PlaceId   string `protobuf:"bytes,1,opt,name=place_id,json=placeId,proto3" json:"place_id,omitempty"`
+	UserId    string `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ColorCode string `protobuf:"bytes,3,opt,name=color_code,json=colorCode,proto3" json:"color_code,omitempty"`
+}
+
+func (x *SaveColorCodeRequest) Reset() {
+	*x = SaveColorCodeRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_tutorialpb_tutorial_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SaveColorCodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SaveColorCodeRequest) ProtoMessage() {}
+
+func (x *SaveColorCodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tutorialpb_tutorial_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SaveColorCodeRequest.ProtoReflect.Descriptor instead.
+func (*SaveColorCodeRequest) Descriptor() ([]byte, []int) {
+	return file_tutorialpb_tutorial_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *SaveColorCodeRequest) GetPlaceId() string {
+	if x != nil {
+		return x.PlaceId
+	}
+	return ""
+}
+
+func (x *SaveColorCodeRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *SaveColorCodeRequest) GetColorCode() string {
+	if x != nil {
+		return x.ColorCode
+	}
+	return ""
+}
+
+type SaveColorCodeResponce struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SaveColorCodeResponce) Reset() {
+	*x = SaveColorCodeResponce{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_tutorialpb_tutorial_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SaveColorCodeResponce) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SaveColorCodeResponce) ProtoMessage() {}
+
+func (x *SaveColorCodeResponce) ProtoReflect() protoreflect.Message {
+	mi := &file_tutorialpb_tutorial_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SaveColorCodeResponce.ProtoReflect.Descriptor instead.
+func (*SaveColorCodeResponce) Descriptor() ([]byte, []int) {
+	return file_tutorialpb_tutorial_proto_rawDescGZIP(), []int{8}
+}
+
+type GetColorCodeRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	PlaceId string `protobuf:"bytes,1,opt,name=place_id,json=placeId,proto3" json:"place_id,omitempty"`
+}
+
+func (x *GetColorCodeRequest) Reset() {
+	*x = GetColorCodeRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_tutorialpb_tutorial_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetColorCodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetColorCodeRequest) ProtoMessage() {}
+
+func (x *GetColorCodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tutorialpb_tutorial_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetColorCodeRequest.ProtoReflect.Descriptor instead.
+func (*GetColorCodeRequest) Descriptor() ([]byte, []int) {
+	return file_tutorialpb_tutorial_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetColorCodeRequest) GetPlaceId() string {
+	if x != nil {
+		return x.PlaceId
+	}
+	return ""
+}
+
+type GetColorCodeResponce struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ColorCode string `protobuf:"bytes,1,opt,name=color_code,json=colorCode,proto3" json:"color_code,omitempty"`
+}
+
+func (x *GetColorCodeResponce) Reset() {
+	*x = GetColorCodeResponce{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_tutorialpb_tutorial_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetColorCodeResponce) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetColorCodeResponce) ProtoMessage() {}
+
+func (x *GetColorCodeResponce) ProtoReflect() protoreflect.Message {
+	mi := &file_tutorialpb_tutorial_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetColorCodeResponce.ProtoReflect.Descriptor instead.
+func (*GetColorCodeResponce) Descriptor() ([]byte, []int) {
+	return file_tutorialpb_tutorial_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *GetColorCodeResponce) GetColorCode() string {
+	if x != nil {
+		return x.ColorCode
+	}
+	return ""
+}
+
 var File_tutorialpb_tutorial_proto protoreflect.FileDescriptor
 
 var file_tutorialpb_tutorial_proto_rawDesc = []byte{
@@ -125,16 +587,73 @@ var file_tutorialpb_tutorial_proto_rawDesc = []byte{
 	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x2c, 0x0a, 0x10, 0x50, 0x72, 0x69, 0x6e, 0x74,
 	0x53, 0x74, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d,
 	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x32, 0x58, 0x0a, 0x07, 0x50, 0x72, 0x69, 0x6e, 0x74, 0x65, 0x72,
-	0x12, 0x4d, 0x0a, 0x08, 0x50, 0x72, 0x69, 0x6e, 0x74, 0x53, 0x74, 0x72, 0x12, 0x1e, 0x2e, 0x67,
-	0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x2e, 0x50, 0x72, 0x69,
-	0x6e, 0x74, 0x53, 0x74, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x67,
-	0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x2e, 0x50, 0x72, 0x69,
-	0x6e, 0x74, 0x53, 0x74, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x22, 0x00, 0x42,
-	0x36, 0x5a, 0x34, 0x68, 0x74, 0x74, 0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75,
-	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x6f, 0x6e, 0x79, 0x6f, 0x38, 0x37, 0x37, 0x2f, 0x67,
-	0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x2f, 0x74, 0x75, 0x74,
-	0x6f, 0x72, 0x69, 0x61, 0x6c, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x6f, 0x0a, 0x10, 0x53, 0x61, 0x76, 0x65, 0x49, 0x6d, 0x61,
+	0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2e, 0x0a, 0x04, 0x69, 0x6e, 0x66,
+	0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x5f, 0x74,
+	0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x2e, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x49, 0x6e, 0x66,
+	0x6f, 0x48, 0x00, 0x52, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x12, 0x23, 0x0a, 0x0c, 0x69, 0x6d, 0x61,
+	0x67, 0x65, 0x5f, 0x62, 0x69, 0x6e, 0x61, 0x72, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x48,
+	0x00, 0x52, 0x0b, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x42, 0x69, 0x6e, 0x61, 0x72, 0x79, 0x42, 0x06,
+	0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x3f, 0x0a, 0x09, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x49,
+	0x6e, 0x66, 0x6f, 0x12, 0x19, 0x0a, 0x08, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x49, 0x64, 0x12, 0x17,
+	0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x22, 0x13, 0x0a, 0x11, 0x53, 0x61, 0x76, 0x65, 0x49,
+	0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x22, 0x2f, 0x0a, 0x12,
+	0x47, 0x65, 0x74, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x55, 0x72, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x19, 0x0a, 0x08, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x49, 0x64, 0x22, 0x32, 0x0a,
+	0x13, 0x47, 0x65, 0x74, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x55, 0x72, 0x6c, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x63, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x5f, 0x75, 0x72,
+	0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x55, 0x72,
+	0x6c, 0x22, 0x69, 0x0a, 0x14, 0x53, 0x61, 0x76, 0x65, 0x43, 0x6f, 0x6c, 0x6f, 0x72, 0x43, 0x6f,
+	0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x19, 0x0a, 0x08, 0x70, 0x6c, 0x61,
+	0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x6c, 0x61,
+	0x63, 0x65, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1d, 0x0a,
+	0x0a, 0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x5f, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x09, 0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x22, 0x17, 0x0a, 0x15,
+	0x53, 0x61, 0x76, 0x65, 0x43, 0x6f, 0x6c, 0x6f, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x63, 0x65, 0x22, 0x30, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6c, 0x6f,
+	0x72, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x19, 0x0a, 0x08,
+	0x70, 0x6c, 0x61, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x70, 0x6c, 0x61, 0x63, 0x65, 0x49, 0x64, 0x22, 0x35, 0x0a, 0x14, 0x47, 0x65, 0x74, 0x43, 0x6f,
+	0x6c, 0x6f, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x12,
+	0x1d, 0x0a, 0x0a, 0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x5f, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x32, 0xc6,
+	0x03, 0x0a, 0x10, 0x54, 0x75, 0x72, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x53, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x12, 0x4d, 0x0a, 0x08, 0x50, 0x72, 0x69, 0x6e, 0x74, 0x53, 0x74, 0x72, 0x12,
+	0x1e, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x2e,
+	0x50, 0x72, 0x69, 0x6e, 0x74, 0x53, 0x74, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x1f, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x2e,
+	0x50, 0x72, 0x69, 0x6e, 0x74, 0x53, 0x74, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65,
+	0x22, 0x00, 0x12, 0x52, 0x0a, 0x09, 0x53, 0x61, 0x76, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x12,
+	0x1f, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x2e,
+	0x53, 0x61, 0x76, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x20, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c,
+	0x2e, 0x53, 0x61, 0x76, 0x65, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x63, 0x65, 0x22, 0x00, 0x28, 0x01, 0x12, 0x56, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x49, 0x6d, 0x61,
+	0x67, 0x65, 0x55, 0x72, 0x6c, 0x12, 0x21, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74,
+	0x6f, 0x72, 0x69, 0x61, 0x6c, 0x2e, 0x47, 0x65, 0x74, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x55, 0x72,
+	0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x5f,
+	0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x2e, 0x47, 0x65, 0x74, 0x49, 0x6d, 0x61, 0x67,
+	0x65, 0x55, 0x72, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x22, 0x00, 0x12, 0x5c,
+	0x0a, 0x0d, 0x53, 0x61, 0x76, 0x65, 0x43, 0x6f, 0x6c, 0x6f, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x12,
+	0x23, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x2e,
+	0x53, 0x61, 0x76, 0x65, 0x43, 0x6f, 0x6c, 0x6f, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x24, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74, 0x6f,
+	0x72, 0x69, 0x61, 0x6c, 0x2e, 0x53, 0x61, 0x76, 0x65, 0x43, 0x6f, 0x6c, 0x6f, 0x72, 0x43, 0x6f,
+	0x64, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x22, 0x00, 0x12, 0x59, 0x0a, 0x0c,
+	0x47, 0x65, 0x74, 0x43, 0x6f, 0x6c, 0x6f, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x22, 0x2e, 0x67,
+	0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x2e, 0x47, 0x65, 0x74,
+	0x43, 0x6f, 0x6c, 0x6f, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x23, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c,
+	0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6c, 0x6f, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x63, 0x65, 0x22, 0x00, 0x42, 0x36, 0x5a, 0x34, 0x68, 0x74, 0x74, 0x70, 0x73,
+	0x3a, 0x2f, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x6f,
+	0x6e, 0x79, 0x6f, 0x38, 0x37, 0x37, 0x2f, 0x67, 0x72, 0x70, 0x63, 0x5f, 0x74, 0x75, 0x74, 0x6f,
+	0x72, 0x69, 0x61, 0x6c, 0x2f, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x70, 0x62, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -149,19 +668,37 @@ func file_tutorialpb_tutorial_proto_rawDescGZIP() []byte {
 	return file_tutorialpb_tutorial_proto_rawDescData
 }
 
-var file_tutorialpb_tutorial_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_tutorialpb_tutorial_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_tutorialpb_tutorial_proto_goTypes = []interface{}{
-	(*PrintStrRequest)(nil),  // 0: grpc_tutorial.PrintStrRequest
-	(*PrintStrResponce)(nil), // 1: grpc_tutorial.PrintStrResponce
+	(*PrintStrRequest)(nil),       // 0: grpc_tutorial.PrintStrRequest
+	(*PrintStrResponce)(nil),      // 1: grpc_tutorial.PrintStrResponce
+	(*SaveImageRequest)(nil),      // 2: grpc_tutorial.SaveImageRequest
+	(*ImageInfo)(nil),             // 3: grpc_tutorial.ImageInfo
+	(*SaveImageResponce)(nil),     // 4: grpc_tutorial.SaveImageResponce
+	(*GetImageUrlRequest)(nil),    // 5: grpc_tutorial.GetImageUrlRequest
+	(*GetImageUrlResponce)(nil),   // 6: grpc_tutorial.GetImageUrlResponce
+	(*SaveColorCodeRequest)(nil),  // 7: grpc_tutorial.SaveColorCodeRequest
+	(*SaveColorCodeResponce)(nil), // 8: grpc_tutorial.SaveColorCodeResponce
+	(*GetColorCodeRequest)(nil),   // 9: grpc_tutorial.GetColorCodeRequest
+	(*GetColorCodeResponce)(nil),  // 10: grpc_tutorial.GetColorCodeResponce
 }
 var file_tutorialpb_tutorial_proto_depIdxs = []int32{
-	0, // 0: grpc_tutorial.Printer.PrintStr:input_type -> grpc_tutorial.PrintStrRequest
-	1, // 1: grpc_tutorial.Printer.PrintStr:output_type -> grpc_tutorial.PrintStrResponce
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3,  // 0: grpc_tutorial.SaveImageRequest.info:type_name -> grpc_tutorial.ImageInfo
+	0,  // 1: grpc_tutorial.TurtorialService.PrintStr:input_type -> grpc_tutorial.PrintStrRequest
+	2,  // 2: grpc_tutorial.TurtorialService.SaveImage:input_type -> grpc_tutorial.SaveImageRequest
+	5,  // 3: grpc_tutorial.TurtorialService.GetImageUrl:input_type -> grpc_tutorial.GetImageUrlRequest
+	7,  // 4: grpc_tutorial.TurtorialService.SaveColorCode:input_type -> grpc_tutorial.SaveColorCodeRequest
+	9,  // 5: grpc_tutorial.TurtorialService.GetColorCode:input_type -> grpc_tutorial.GetColorCodeRequest
+	1,  // 6: grpc_tutorial.TurtorialService.PrintStr:output_type -> grpc_tutorial.PrintStrResponce
+	4,  // 7: grpc_tutorial.TurtorialService.SaveImage:output_type -> grpc_tutorial.SaveImageResponce
+	6,  // 8: grpc_tutorial.TurtorialService.GetImageUrl:output_type -> grpc_tutorial.GetImageUrlResponce
+	8,  // 9: grpc_tutorial.TurtorialService.SaveColorCode:output_type -> grpc_tutorial.SaveColorCodeResponce
+	10, // 10: grpc_tutorial.TurtorialService.GetColorCode:output_type -> grpc_tutorial.GetColorCodeResponce
+	6,  // [6:11] is the sub-list for method output_type
+	1,  // [1:6] is the sub-list for method input_type
+	1,  // [1:1] is the sub-list for extension type_name
+	1,  // [1:1] is the sub-list for extension extendee
+	0,  // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_tutorialpb_tutorial_proto_init() }
@@ -194,6 +731,118 @@ func file_tutorialpb_tutorial_proto_init() {
 				return nil
 			}
 		}
+		file_tutorialpb_tutorial_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SaveImageRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_tutorialpb_tutorial_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ImageInfo); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_tutorialpb_tutorial_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SaveImageResponce); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_tutorialpb_tutorial_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetImageUrlRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_tutorialpb_tutorial_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetImageUrlResponce); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_tutorialpb_tutorial_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SaveColorCodeRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_tutorialpb_tutorial_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SaveColorCodeResponce); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_tutorialpb_tutorial_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetColorCodeRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_tutorialpb_tutorial_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetColorCodeResponce); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+	}
+	file_tutorialpb_tutorial_proto_msgTypes[2].OneofWrappers = []interface{}{
+		(*SaveImageRequest_Info)(nil),
+		(*SaveImageRequest_ImageBinary)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -201,7 +850,7 @@ func file_tutorialpb_tutorial_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_tutorialpb_tutorial_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -18,88 +18,267 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// PrinterClient is the client API for Printer service.
+// TurtorialServiceClient is the client API for TurtorialService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PrinterClient interface {
+type TurtorialServiceClient interface {
 	PrintStr(ctx context.Context, in *PrintStrRequest, opts ...grpc.CallOption) (*PrintStrResponce, error)
+	SaveImage(ctx context.Context, opts ...grpc.CallOption) (TurtorialService_SaveImageClient, error)
+	GetImageUrl(ctx context.Context, in *GetImageUrlRequest, opts ...grpc.CallOption) (*GetImageUrlResponce, error)
+	SaveColorCode(ctx context.Context, in *SaveColorCodeRequest, opts ...grpc.CallOption) (*SaveColorCodeResponce, error)
+	GetColorCode(ctx context.Context, in *GetColorCodeRequest, opts ...grpc.CallOption) (*GetColorCodeResponce, error)
 }
 
-type printerClient struct {
+type turtorialServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPrinterClient(cc grpc.ClientConnInterface) PrinterClient {
-	return &printerClient{cc}
+func NewTurtorialServiceClient(cc grpc.ClientConnInterface) TurtorialServiceClient {
+	return &turtorialServiceClient{cc}
 }
 
-func (c *printerClient) PrintStr(ctx context.Context, in *PrintStrRequest, opts ...grpc.CallOption) (*PrintStrResponce, error) {
+func (c *turtorialServiceClient) PrintStr(ctx context.Context, in *PrintStrRequest, opts ...grpc.CallOption) (*PrintStrResponce, error) {
 	out := new(PrintStrResponce)
-	err := c.cc.Invoke(ctx, "/grpc_tutorial.Printer/PrintStr", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/grpc_tutorial.TurtorialService/PrintStr", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// PrinterServer is the server API for Printer service.
-// All implementations must embed UnimplementedPrinterServer
+func (c *turtorialServiceClient) SaveImage(ctx context.Context, opts ...grpc.CallOption) (TurtorialService_SaveImageClient, error) {
+	stream, err := c.cc.NewStream(ctx, &TurtorialService_ServiceDesc.Streams[0], "/grpc_tutorial.TurtorialService/SaveImage", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &turtorialServiceSaveImageClient{stream}
+	return x, nil
+}
+
+type TurtorialService_SaveImageClient interface {
+	Send(*SaveImageRequest) error
+	CloseAndRecv() (*SaveImageResponce, error)
+	grpc.ClientStream
+}
+
+type turtorialServiceSaveImageClient struct {
+	grpc.ClientStream
+}
+
+func (x *turtorialServiceSaveImageClient) Send(m *SaveImageRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *turtorialServiceSaveImageClient) CloseAndRecv() (*SaveImageResponce, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(SaveImageResponce)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *turtorialServiceClient) GetImageUrl(ctx context.Context, in *GetImageUrlRequest, opts ...grpc.CallOption) (*GetImageUrlResponce, error) {
+	out := new(GetImageUrlResponce)
+	err := c.cc.Invoke(ctx, "/grpc_tutorial.TurtorialService/GetImageUrl", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *turtorialServiceClient) SaveColorCode(ctx context.Context, in *SaveColorCodeRequest, opts ...grpc.CallOption) (*SaveColorCodeResponce, error) {
+	out := new(SaveColorCodeResponce)
+	err := c.cc.Invoke(ctx, "/grpc_tutorial.TurtorialService/SaveColorCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *turtorialServiceClient) GetColorCode(ctx context.Context, in *GetColorCodeRequest, opts ...grpc.CallOption) (*GetColorCodeResponce, error) {
+	out := new(GetColorCodeResponce)
+	err := c.cc.Invoke(ctx, "/grpc_tutorial.TurtorialService/GetColorCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TurtorialServiceServer is the server API for TurtorialService service.
+// All implementations must embed UnimplementedTurtorialServiceServer
 // for forward compatibility
-type PrinterServer interface {
+type TurtorialServiceServer interface {
 	PrintStr(context.Context, *PrintStrRequest) (*PrintStrResponce, error)
-	mustEmbedUnimplementedPrinterServer()
+	SaveImage(TurtorialService_SaveImageServer) error
+	GetImageUrl(context.Context, *GetImageUrlRequest) (*GetImageUrlResponce, error)
+	SaveColorCode(context.Context, *SaveColorCodeRequest) (*SaveColorCodeResponce, error)
+	GetColorCode(context.Context, *GetColorCodeRequest) (*GetColorCodeResponce, error)
+	mustEmbedUnimplementedTurtorialServiceServer()
 }
 
-// UnimplementedPrinterServer must be embedded to have forward compatible implementations.
-type UnimplementedPrinterServer struct {
+// UnimplementedTurtorialServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedTurtorialServiceServer struct {
 }
 
-func (UnimplementedPrinterServer) PrintStr(context.Context, *PrintStrRequest) (*PrintStrResponce, error) {
+func (UnimplementedTurtorialServiceServer) PrintStr(context.Context, *PrintStrRequest) (*PrintStrResponce, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PrintStr not implemented")
 }
-func (UnimplementedPrinterServer) mustEmbedUnimplementedPrinterServer() {}
+func (UnimplementedTurtorialServiceServer) SaveImage(TurtorialService_SaveImageServer) error {
+	return status.Errorf(codes.Unimplemented, "method SaveImage not implemented")
+}
+func (UnimplementedTurtorialServiceServer) GetImageUrl(context.Context, *GetImageUrlRequest) (*GetImageUrlResponce, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetImageUrl not implemented")
+}
+func (UnimplementedTurtorialServiceServer) SaveColorCode(context.Context, *SaveColorCodeRequest) (*SaveColorCodeResponce, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveColorCode not implemented")
+}
+func (UnimplementedTurtorialServiceServer) GetColorCode(context.Context, *GetColorCodeRequest) (*GetColorCodeResponce, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetColorCode not implemented")
+}
+func (UnimplementedTurtorialServiceServer) mustEmbedUnimplementedTurtorialServiceServer() {}
 
-// UnsafePrinterServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PrinterServer will
+// UnsafeTurtorialServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TurtorialServiceServer will
 // result in compilation errors.
-type UnsafePrinterServer interface {
-	mustEmbedUnimplementedPrinterServer()
+type UnsafeTurtorialServiceServer interface {
+	mustEmbedUnimplementedTurtorialServiceServer()
 }
 
-func RegisterPrinterServer(s grpc.ServiceRegistrar, srv PrinterServer) {
-	s.RegisterService(&Printer_ServiceDesc, srv)
+func RegisterTurtorialServiceServer(s grpc.ServiceRegistrar, srv TurtorialServiceServer) {
+	s.RegisterService(&TurtorialService_ServiceDesc, srv)
 }
 
-func _Printer_PrintStr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TurtorialService_PrintStr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PrintStrRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PrinterServer).PrintStr(ctx, in)
+		return srv.(TurtorialServiceServer).PrintStr(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpc_tutorial.Printer/PrintStr",
+		FullMethod: "/grpc_tutorial.TurtorialService/PrintStr",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PrinterServer).PrintStr(ctx, req.(*PrintStrRequest))
+		return srv.(TurtorialServiceServer).PrintStr(ctx, req.(*PrintStrRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Printer_ServiceDesc is the grpc.ServiceDesc for Printer service.
+func _TurtorialService_SaveImage_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(TurtorialServiceServer).SaveImage(&turtorialServiceSaveImageServer{stream})
+}
+
+type TurtorialService_SaveImageServer interface {
+	SendAndClose(*SaveImageResponce) error
+	Recv() (*SaveImageRequest, error)
+	grpc.ServerStream
+}
+
+type turtorialServiceSaveImageServer struct {
+	grpc.ServerStream
+}
+
+func (x *turtorialServiceSaveImageServer) SendAndClose(m *SaveImageResponce) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *turtorialServiceSaveImageServer) Recv() (*SaveImageRequest, error) {
+	m := new(SaveImageRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _TurtorialService_GetImageUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetImageUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TurtorialServiceServer).GetImageUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc_tutorial.TurtorialService/GetImageUrl",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TurtorialServiceServer).GetImageUrl(ctx, req.(*GetImageUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TurtorialService_SaveColorCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveColorCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TurtorialServiceServer).SaveColorCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc_tutorial.TurtorialService/SaveColorCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TurtorialServiceServer).SaveColorCode(ctx, req.(*SaveColorCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TurtorialService_GetColorCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetColorCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TurtorialServiceServer).GetColorCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc_tutorial.TurtorialService/GetColorCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TurtorialServiceServer).GetColorCode(ctx, req.(*GetColorCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// TurtorialService_ServiceDesc is the grpc.ServiceDesc for TurtorialService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Printer_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "grpc_tutorial.Printer",
-	HandlerType: (*PrinterServer)(nil),
+var TurtorialService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "grpc_tutorial.TurtorialService",
+	HandlerType: (*TurtorialServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "PrintStr",
-			Handler:    _Printer_PrintStr_Handler,
+			Handler:    _TurtorialService_PrintStr_Handler,
+		},
+		{
+			MethodName: "GetImageUrl",
+			Handler:    _TurtorialService_GetImageUrl_Handler,
+		},
+		{
+			MethodName: "SaveColorCode",
+			Handler:    _TurtorialService_SaveColorCode_Handler,
+		},
+		{
+			MethodName: "GetColorCode",
+			Handler:    _TurtorialService_GetColorCode_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "SaveImage",
+			Handler:       _TurtorialService_SaveImage_Handler,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "tutorialpb/tutorial.proto",
 }
