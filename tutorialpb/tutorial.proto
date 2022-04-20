@@ -6,6 +6,7 @@ package grpc_tutorial;
 
 service TurtorialService {
   rpc PrintStr(PrintStrRequest) returns (PrintStrResponce) {}
+  rpc SaveImageUnary(SaveImageUnaryRequest) returns (SaveImageUnaryResponce) {}
   rpc SaveImage(stream SaveImageRequest) returns (SaveImageResponce) {}
   rpc GetImageUrl(GetImageUrlRequest) returns (GetImageUrlResponce) {}
   rpc SaveColorCode(SaveColorCodeRequest) returns (SaveColorCodeResponce) {}
@@ -19,6 +20,14 @@ message PrintStrRequest {
 message PrintStrResponce {
   string message = 1;
 }
+
+message SaveImageUnaryRequest {
+  string place_id     = 1;
+  string user_id      = 2;
+  bytes  image_binary = 3;
+}
+
+message SaveImageUnaryResponce {}
 
 message SaveImageRequest {
   oneof data {

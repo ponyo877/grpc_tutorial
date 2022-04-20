@@ -40,6 +40,40 @@ func GetULID() string {
 	return ulid.MustNew(ulid.Timestamp(t), entropy).String()
 }
 
+func (ts *TutorialServer) SaveImageUnary(ctx context.Context, in *pb.SaveImageUnaryRequest) (*pb.SaveImageUnaryResponce, error) {
+
+	placeId := in.GetPlaceId()
+	userId := in.GetUserId()
+	logUrlId := GetULID()
+
+	imageBinary := in.GetImageBinary()
+
+	tutorial_recode := &model.Tutorial{
+		PlaceID:   placeId,
+		LogoUrlID: logUrlId,
+		UpdatedBy: userId,
+		CreatedBy: userId,
+	}
+
+	ts.Db.Clauses(clause.OnConflict{
+		Columns:   []clause.Column{{Name: "place_id"}},
+		DoUpdates: clause.AssignmentColumns([]string{"logo_url_id", "updated_by"}),
+	}).Create(tutorial_recode)
+
+	bucket := "tutorial_backet"
+	object := logUrlId + ".jpg"
+	writer := ts.StorageClient.Bucket(bucket).Object(object).NewWriter(ctx)
+	if _, err := writer.Write(imageBinary); err != nil {
+		return &pb.SaveImageUnaryResponce{}, err
+	}
+	log.Print("finish saving file to GCS")
+	if err := writer.Close(); err != nil {
+		panic(err)
+	}
+
+	return &pb.SaveImageUnaryResponce{}, nil
+}
+
 func (ts *TutorialServer) SaveImage(stream pb.TurtorialService_SaveImageServer) error {
 	ctx := context.Background()
 

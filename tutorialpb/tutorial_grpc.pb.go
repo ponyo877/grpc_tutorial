@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TurtorialServiceClient interface {
 	PrintStr(ctx context.Context, in *PrintStrRequest, opts ...grpc.CallOption) (*PrintStrResponce, error)
+	SaveImageUnary(ctx context.Context, in *SaveImageUnaryRequest, opts ...grpc.CallOption) (*SaveImageUnaryResponce, error)
 	SaveImage(ctx context.Context, opts ...grpc.CallOption) (TurtorialService_SaveImageClient, error)
 	GetImageUrl(ctx context.Context, in *GetImageUrlRequest, opts ...grpc.CallOption) (*GetImageUrlResponce, error)
 	SaveColorCode(ctx context.Context, in *SaveColorCodeRequest, opts ...grpc.CallOption) (*SaveColorCodeResponce, error)
@@ -40,6 +41,15 @@ func NewTurtorialServiceClient(cc grpc.ClientConnInterface) TurtorialServiceClie
 func (c *turtorialServiceClient) PrintStr(ctx context.Context, in *PrintStrRequest, opts ...grpc.CallOption) (*PrintStrResponce, error) {
 	out := new(PrintStrResponce)
 	err := c.cc.Invoke(ctx, "/grpc_tutorial.TurtorialService/PrintStr", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *turtorialServiceClient) SaveImageUnary(ctx context.Context, in *SaveImageUnaryRequest, opts ...grpc.CallOption) (*SaveImageUnaryResponce, error) {
+	out := new(SaveImageUnaryResponce)
+	err := c.cc.Invoke(ctx, "/grpc_tutorial.TurtorialService/SaveImageUnary", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -112,6 +122,7 @@ func (c *turtorialServiceClient) GetColorCode(ctx context.Context, in *GetColorC
 // for forward compatibility
 type TurtorialServiceServer interface {
 	PrintStr(context.Context, *PrintStrRequest) (*PrintStrResponce, error)
+	SaveImageUnary(context.Context, *SaveImageUnaryRequest) (*SaveImageUnaryResponce, error)
 	SaveImage(TurtorialService_SaveImageServer) error
 	GetImageUrl(context.Context, *GetImageUrlRequest) (*GetImageUrlResponce, error)
 	SaveColorCode(context.Context, *SaveColorCodeRequest) (*SaveColorCodeResponce, error)
@@ -125,6 +136,9 @@ type UnimplementedTurtorialServiceServer struct {
 
 func (UnimplementedTurtorialServiceServer) PrintStr(context.Context, *PrintStrRequest) (*PrintStrResponce, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PrintStr not implemented")
+}
+func (UnimplementedTurtorialServiceServer) SaveImageUnary(context.Context, *SaveImageUnaryRequest) (*SaveImageUnaryResponce, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveImageUnary not implemented")
 }
 func (UnimplementedTurtorialServiceServer) SaveImage(TurtorialService_SaveImageServer) error {
 	return status.Errorf(codes.Unimplemented, "method SaveImage not implemented")
@@ -165,6 +179,24 @@ func _TurtorialService_PrintStr_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TurtorialServiceServer).PrintStr(ctx, req.(*PrintStrRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TurtorialService_SaveImageUnary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveImageUnaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TurtorialServiceServer).SaveImageUnary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc_tutorial.TurtorialService/SaveImageUnary",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TurtorialServiceServer).SaveImageUnary(ctx, req.(*SaveImageUnaryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -259,6 +291,10 @@ var TurtorialService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PrintStr",
 			Handler:    _TurtorialService_PrintStr_Handler,
+		},
+		{
+			MethodName: "SaveImageUnary",
+			Handler:    _TurtorialService_SaveImageUnary_Handler,
 		},
 		{
 			MethodName: "GetImageUrl",

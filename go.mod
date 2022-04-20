@@ -5,6 +5,7 @@ go 1.18
 require (
 	cloud.google.com/go/storage v1.10.0
 	github.com/labstack/echo/v4 v4.7.2
+	github.com/oklog/ulid/v2 v2.0.2
 	google.golang.org/api v0.74.0
 	google.golang.org/grpc v1.45.0
 	google.golang.org/protobuf v1.28.0

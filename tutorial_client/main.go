@@ -25,6 +25,7 @@ func main() {
 	}
 
 	e := echo.New()
+	e.POST("/save_image_unary/:placeId", cs.SaveImageUnary)
 	e.POST("/save_image/:placeId", cs.SaveImage)
 	e.GET("/get_image_url/:placeId", cs.GetImageUrl)
 	e.POST("/save_color_code/:placeId", cs.SaveColorCode)

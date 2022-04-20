@@ -3,6 +3,7 @@ package client_service
 import (
 	"context"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -12,6 +13,44 @@ import (
 
 type ClientService struct {
 	TutorialClient pb.TurtorialServiceClient
+}
+
+func (cs *ClientService) SaveImageUnary(c echo.Context) error {
+	ctx := context.Background()
+
+	placeId := c.Param("placeId")
+	userId := c.FormValue("userId")
+	file, err := c.FormFile("file")
+	if err != nil {
+		return err
+	}
+
+	f, err := file.Open()
+	defer f.Close()
+	if err != nil {
+		log.Printf("cannot open file: %v ", err)
+		return err
+	}
+
+	imageBinary, err := ioutil.ReadAll(f)
+	if err != nil {
+		log.Printf("cannot read file from network: %v ", err)
+		return err
+	}
+
+	req := &pb.SaveImageUnaryRequest{
+		PlaceId:     placeId,
+		UserId:      userId,
+		ImageBinary: imageBinary,
+	}
+
+	resp, err := cs.TutorialClient.SaveImageUnary(ctx, req)
+	if err != nil {
+		log.Printf("fail tutorialClient.SaveImage: %v", err)
+		return c.JSON(http.StatusOK, resp)
+	}
+
+	return c.JSON(http.StatusOK, resp)
 }
 
 func (cs *ClientService) SaveImage(c echo.Context) error {
